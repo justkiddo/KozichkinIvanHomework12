@@ -14,13 +14,12 @@ namespace root
         private EnemyInfo _enemyInfo;
         private float _distanceFromPlayer;
         private GameplayInfo _gameplayInfo;
-        
+        private int health;
 
         [Inject]
-        private void Construct(IPlayer player, EnemyInfo enemyInfo, GameplayInfo gameplayInfo)
+        private void Construct(IPlayer player, GameplayInfo gameplayInfo)
         {
             _player = player;
-            _enemyInfo = enemyInfo;
             _gameplayInfo = gameplayInfo;
         }
 
@@ -31,7 +30,8 @@ namespace root
 
         public void Init(EnemyInfo enemyInfo)
         {
-        
+            _enemyInfo = enemyInfo;
+            health = _enemyInfo.Health;
         }
 
 
@@ -43,7 +43,7 @@ namespace root
                 FollowingPlayer();
             }
 
-            if (_enemyInfo.Health <= 0)
+            if (health <= 0)
             {
                 Destroy(this.gameObject);
             }
@@ -54,7 +54,7 @@ namespace root
         {
             if (collision.gameObject.CompareTag("Bullet"))
             {
-                _enemyInfo.Health -= 5;
+                health -= 5;
                 Instantiate(DamagePrefab, transform.position, Quaternion.identity);
             }
         }

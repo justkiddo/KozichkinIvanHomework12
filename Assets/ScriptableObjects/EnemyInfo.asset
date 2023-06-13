@@ -15,5 +15,5 @@ MonoBehaviour:
   <Name>k__BackingField: Enemy 1
   <Prefab>k__BackingField: {fileID: 3896162451461488717, guid: 661e44b3505c19f45894db5f46cb3e74, type: 3}
   <FollowDistance>k__BackingField: 15
-  <Health>k__BackingField: 0
+  <Health>k__BackingField: 10
   <Speed>k__BackingField: 2
