@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - Particle
   layers:
   - Default
   - TransparentFX

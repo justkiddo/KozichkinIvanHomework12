@@ -388,7 +388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756227278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.05971247, y: 0.14599997, z: 0.63}
+  m_LocalPosition: {x: 0.23, y: 1.05, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -603,13 +603,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3579978, y: -0.029119432, z: 0.011162169, w: 0.9332015}
-  m_LocalPosition: {x: 0.96655005, y: 19.129827, z: -21.951986}
+  m_LocalRotation: {x: 0.28145263, y: -0.0019786856, z: 0.0005727997, w: 0.9595729}
+  m_LocalPosition: {x: -1.1498682, y: 5.2234216, z: -6.597169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1779527824}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1086064429
 GameObject:
@@ -838,6 +838,7 @@ MonoBehaviour:
   _camera: {fileID: 963194227}
   enemyInfos:
   - {fileID: 11400000, guid: 2cfb13d28a8af86408b5025ad6e430bd, type: 2}
+  - {fileID: 11400000, guid: 13f606c929ba34741adb0f4cca75d71c, type: 2}
   bullet: {fileID: 1683484710463745341, guid: 86f4ed940bc9f174da02e016e61c1496, type: 3}
 --- !u!4 &1632939091
 Transform:
@@ -1049,6 +1050,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 756227279}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1061,7 +1063,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1779527820}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 0.77
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1136,4 +1138,4 @@ MonoBehaviour:
   navMeshAgent: {fileID: 1779527825}
   bulletPrefab: {fileID: 3984683874588205128, guid: 86f4ed940bc9f174da02e016e61c1496, type: 3}
   shootPoint: {fileID: 756227279}
-  speed: 25
+  speed: 15

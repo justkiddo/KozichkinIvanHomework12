@@ -1,8 +1,6 @@
 using System.Collections;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class PlayerMove : MonoBehaviour, IPlayer
 {
@@ -18,11 +16,12 @@ public class PlayerMove : MonoBehaviour, IPlayer
         navMeshAgent.SetDestination(pos);
     }
 
-    public void Shoot()
+    public void Shoot(Vector3 pos)
     {
+        var direction = pos - transform.position;
         var bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         var rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
+        rb.velocity = new Vector3(direction.x,direction.y, direction.z) * speed;
         StartCoroutine(DestroyBullet(bullet));
     }
 

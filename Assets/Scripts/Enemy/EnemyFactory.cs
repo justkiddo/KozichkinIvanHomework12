@@ -11,7 +11,7 @@ namespace root
     {
         private DiContainer _diContainer;
         private List<EnemyInfo> _enemyInfos;
-
+        
 
         public EnemyFactory(DiContainer diContainer, List<EnemyInfo> enemyInfos)
         {

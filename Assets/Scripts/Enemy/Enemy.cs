@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -22,11 +21,7 @@ namespace root
             _player = player;
             _gameplayInfo = gameplayInfo;
         }
-
-        private void Awake()
-        {
-            
-        }
+        
 
         public void Init(EnemyInfo enemyInfo)
         {
@@ -45,6 +40,7 @@ namespace root
 
             if (health <= 0)
             {
+                _gameplayInfo.EnemyKilled.Value++;
                 Destroy(this.gameObject);
             }
         }
@@ -56,16 +52,14 @@ namespace root
             {
                 health -= 5;
                 Instantiate(DamagePrefab, transform.position, Quaternion.identity);
+                Destroy(collision.gameObject);
             }
         }
         
 
         private void FollowingPlayer()
         {
-            // transform.position = Vector3.MoveTowards(transform.position, _player.GetCurrentPosition(),
-            //     Time.deltaTime * _enemyInfo.Speed);
             navMeshAgent.SetDestination(_player.GetCurrentPosition());
-            
         }
 
         private void DistanceCheck()
@@ -74,7 +68,7 @@ namespace root
             if (_distanceFromPlayer < _enemyInfo.FollowDistance)
             {
                 followPlayer = true;
-                if (Vector3.Distance(_player.GetCurrentPosition(), transform.position) < 1f)
+                if (Vector3.Distance(_player.GetCurrentPosition(), transform.position) < 1.5f)
                 {
                     _gameplayInfo.EndGame.Value = true;
                 }

@@ -3,6 +3,7 @@ using System.Collections;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace root
 {
@@ -14,7 +15,8 @@ namespace root
         private  EnemyFactory _enemyFactory;
         private  GameplayInfo _gameplayInfo;
         private  InputHandler _inputHandler;
-
+        private int count;
+        
         [Inject]
         private void Construct(IPlayer player, GameplayInfo gameplayInfo, InputHandler inputHandler, 
             EnemyFactory enemyFactory)
@@ -30,25 +32,41 @@ namespace root
             AddListeners();
             _inputHandler.OnClickedMove += OnClickedMove;
             _inputHandler.OnClickedShoot += OnClickedShoot;
-            _gameplayInfo.EndGame.Value = false;
-            _enemyFactory.Create();
+            StartSpawn();
         }
         
+        private void StartSpawn()
+        {
+           Observable.Timer(TimeSpan.FromSeconds(3)).Repeat().Subscribe(_ => _enemyFactory.Create());
+        }
+
+
+
         private void AddListeners()
         {
             _gameplayInfo.EndGame.Subscribe(_ => UpdateInfo());
-            
+            _gameplayInfo.EnemyKilled.Subscribe(_ => UpdateInfo());
         }
+
+
+
         private void UpdateInfo()
         {
-            if (_gameplayInfo.EndGame.Value)
+            if (_gameplayInfo.EndGame.Value || _gameplayInfo.EnemyKilled.Value >= _gameplayInfo.EnemyCount.Value) // 
             {
                 EndGame();
             }
         }
+        
         private void EndGame()
         {
-            _gameplayInfo.EndGame.Value = true;
+            _inputHandler.OnClickedMove -= OnClickedMove;
+            _inputHandler.OnClickedShoot -= OnClickedShoot;
+            var particles = GameObject.FindGameObjectsWithTag("Particle");
+            foreach (var particle in particles)
+            {
+                Object.Destroy(particle);
+            }
             Time.timeScale = 0;
         }
         
@@ -56,9 +74,9 @@ namespace root
         {
             _player.MoveTo(pos);
         }
-        private void OnClickedShoot()
+        private void OnClickedShoot(Vector3 pos)
         {
-            _player.Shoot();
+            _player.Shoot(pos);
         }
         
         public void Dispose()

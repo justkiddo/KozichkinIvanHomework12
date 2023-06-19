@@ -6,7 +6,7 @@ public class InputHandler: ITickable
 {
     private readonly Camera _camera;
     public Action<Vector3> OnClickedMove;
-    public Action OnClickedShoot;
+    public Action<Vector3> OnClickedShoot;
     
     private const string LayerName = "Ground";
 
@@ -26,7 +26,12 @@ public class InputHandler: ITickable
     {
         if (Input.GetMouseButtonDown(1))
         {
-                OnClickedShoot?.Invoke();
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            var layer = LayerMask.GetMask(LayerName);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 1000, layer))
+            {
+                OnClickedShoot?.Invoke(hitInfo.point);
+            }
         }
     }
 
