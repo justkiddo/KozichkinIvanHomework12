@@ -37,7 +37,7 @@ namespace root
         
         private void StartSpawn()
         {
-           Observable.Timer(TimeSpan.FromSeconds(3)).Repeat().Subscribe(_ => _enemyFactory.Create());
+           Observable.Timer(TimeSpan.FromSeconds(4)).Repeat().Subscribe(_ => _enemyFactory.Create());
         }
 
 

@@ -32,7 +32,10 @@ namespace root
 
         private void Update()
         {
-             DistanceCheck();
+            followPlayer = true;
+            DeathCheck();
+            
+            // DistanceCheck();
             if (followPlayer)
             {
                 FollowingPlayer();
@@ -68,10 +71,7 @@ namespace root
             if (_distanceFromPlayer < _enemyInfo.FollowDistance)
             {
                 followPlayer = true;
-                if (Vector3.Distance(_player.GetCurrentPosition(), transform.position) < 1.5f)
-                {
-                    _gameplayInfo.EndGame.Value = true;
-                }
+                //DeathCheck();
             }
             else
             {
@@ -79,6 +79,12 @@ namespace root
             }
         }
 
-
+        private void DeathCheck()
+        {
+            if (Vector3.Distance(_player.GetCurrentPosition(), transform.position) < 1.5f)
+            {
+                _gameplayInfo.EndGame.Value = true;
+            }
+        }
     }
 }
